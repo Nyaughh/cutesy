@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { Button } from "@/components/ui/button";
+import Link from "next/link"
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,7 +18,35 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <header className="bg-[#fff] shadow-md px-6 py-4 flex items-center justify-between">
+        <Link href="/" className="flex items-center gap-2" prefetch={false}>
+          <span className="text-xl font-bold">Cutesy</span>
+        </Link>
+        <nav className="hidden md:flex items-center gap-6">
+          <Link href="/compo" className="text-sm font-medium hover:text-[#e84393] transition-colors" prefetch={false}>
+            Components
+          </Link>
+          <Link href="/installation" className="text-sm font-medium hover:text-[#e84393] transition-colors" prefetch={false}>
+            Installation
+          </Link>
+          <Link href="docs" className="text-sm font-medium hover:text-[#e84393] transition-colors" prefetch={false}>
+            Documentation
+          </Link>
+          <Link href="github" className="text-sm font-medium hover:text-[#e84393] transition-colors" prefetch={false}>
+            GitHub
+          </Link>
+        </nav>
+        <Button
+          size="sm"
+          className="rounded-full px-4 py-2 text-sm font-medium bg-[#e84393] text-white hover:bg-[#d32f2f] transition-colors"
+        >
+          Get Started
+        </Button>
+      </header>
+      
+        {children}</body>
     </html>
+    
   );
 }
