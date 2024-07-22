@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
+import Audio from "@/components/ui/audioplayer"
 
 export default function Component() {
   return (
@@ -15,6 +16,7 @@ export default function Component() {
                 <div className="flex items-center gap-4 mb-4">
                   <div className="bg-[#ffd6e4] rounded-full w-12 h-12 flex items-center justify-center">
                     <GithubIcon className="w-6 h-6 text-[#e84393]" />
+                    
                   </div>
                   <h3 className="text-xl font-bold">GitHub</h3>
                 </div>
@@ -22,6 +24,7 @@ export default function Component() {
               </Card>
             </div>
           </div>
+          <Audio></Audio>
         </section> 
         
       </main>
