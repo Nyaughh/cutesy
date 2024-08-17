@@ -110,6 +110,7 @@ function ComponentCard({
             size="icon"
             className="absolute top-2 right-2 w-4 h-4 hover:bg-transparent text-stone-400 hover:text-stone-900"
             onClick={onCodeCopy}
+            style={{ position: 'absolute', top: '8px', right: '8px' }}
           >
             <ClipboardIcon className="w-4 h-4" />
             <span className="sr-only">Copy</span>
