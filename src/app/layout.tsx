@@ -46,21 +46,18 @@ export default function RootLayout({
                   <span className="sr-only">Toggle navigation</span>
                 </Button>
               </DrawerTrigger>
-              <DrawerContent>
-                <DrawerHeader>
-                  <DrawerTitle>Navigation</DrawerTitle>
-                </DrawerHeader>
-                <div className="grid gap-4 p-4">
-                  <Link href="/compo" className="flex items-center gap-2 text-sm font-medium transition-colors hover:text-primary" prefetch={false}>
+              <DrawerContent className="fixed inset-0 z-50 flex flex-col bg-white">
+                <div className="flex flex-col items-center justify-center gap-4 p-4 h-full">
+                  <Link href="/compo" className="flex items-center gap-2 text-lg font-medium transition-all duration-300 ease-in-out transform hover:scale-105 hover:text-primary" prefetch={false}>
                     Components
                   </Link>
-                  <Link href="/installation" className="flex items-center gap-2 text-sm font-medium transition-colors hover:text-primary" prefetch={false}>
+                  <Link href="/installation" className="flex items-center gap-2 text-lg font-medium transition-all duration-300 ease-in-out transform hover:scale-105 hover:text-primary" prefetch={false}>
                     Installation
                   </Link>
-                  <Link href="docs" className="flex items-center gap-2 text-sm font-medium transition-colors hover:text-primary" prefetch={false}>
+                  <Link href="docs" className="flex items-center gap-2 text-lg font-medium transition-all duration-300 ease-in-out transform hover:scale-105 hover:text-primary" prefetch={false}>
                     Documentation
                   </Link>
-                  <Link href="github" className="flex items-center gap-2 text-sm font-medium transition-colors hover:text-primary" prefetch={false}>
+                  <Link href="github" className="flex items-center gap-2 text-lg font-medium transition-all duration-300 ease-in-out transform hover:scale-105 hover:text-primary" prefetch={false}>
                     GitHub
                   </Link>
                 </div>
