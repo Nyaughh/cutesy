@@ -1,23 +1,60 @@
+'use client'
 
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
+import { useState } from "react"
+
+function ClipboardIcon(props: any) {
+  return (
+    <svg
+      {...props}
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <rect width="8" height="4" x="8" y="2" rx="1" ry="1" />
+      <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
+    </svg>
+  )
+}
 
 export default function Component() {
+  const [notification, setNotification] = useState<string | null>(null)
+
+  const copyToClipboard = (text: string) => {
+    navigator.clipboard.writeText(text)
+    setNotification("Code copied to clipboard!")
+    setTimeout(() => setNotification(null), 2000) // Hide notification after 2 seconds
+  }
+
   return (
     <div className="flex flex-col min-h-screen bg-[#ffedf5] text-[#333] font-inter">
       <main className="flex-1">
         <section className="py-16 px-6 md:px-12 lg:px-20 bg-[#ffedf5]">
           <div className="max-w-5xl mx-auto">
             <h2 className="text-2xl md:text-3xl font-bold mb-8">Get Started with Cutesy</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="space-y-8">
               <div>
                 <h3 className="text-xl font-bold mb-4">Installation</h3>
-                <p className="text-[#666] mb-4">Install the Cutesy library using your preferred package manager:</p>
-                <div className="bg-[#fff] rounded-md p-4 overflow-auto">
-                  <pre className="text-sm font-mono">{`npm install @cutesy/react
-# or
-yarn add @cutesy/react`}</pre>
+                <p className="text-[#666] mb-4">Install the Cutesy library:</p>
+                <div className="bg-[#fff] rounded-md p-4 overflow-auto relative">
+                  <pre className="text-sm font-mono">{`npx cutesy@latest add audio`}</pre>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="absolute top-2 right-2 w-4 h-4 hover:bg-transparent text-stone-400 hover:text-stone-900"
+                    onClick={() => copyToClipboard('npx cutesy@latest add audio')}
+                  >
+                    <ClipboardIcon className="w-4 h-4" />
+                    <span className="sr-only">Copy</span>
+                  </Button>
                 </div>
               </div>
               <div>
@@ -25,33 +62,27 @@ yarn add @cutesy/react`}</pre>
                 <p className="text-[#666] mb-4">
                   Import the components you need and start using them in your application:
                 </p>
-                <div className="bg-[#fff] rounded-md p-4 overflow-auto">
-                  <pre className="text-sm font-mono">{`import { Button, Toggle, Progress, Avatar } from '@cutesy/react'
-
-function App() {
-  return (
-    <div>
-      <Button variant="cutesy">
-        <Icon prompt="Panda" className="w-5 h-5" />
-        Click me
-      </Button>
-      <Toggle>
-        <ToggleThumb className="bg-[#e84393] rounded-full w-6 h-6" />
-      </Toggle>
-      <Progress value={75} className="h-4 rounded-full bg-gradient-to-r from-[#e84393] via-[#f06292] to-[#f48fb1]" />
-      <Avatar className="w-12 h-12">
-        <AvatarImage src="/panda-avatar.png" alt="Panda Avatar" />
-        <AvatarFallback>PA</AvatarFallback>
-      </Avatar>
-    </div>
-  )
-}`}</pre>
+                <div className="bg-[#fff] rounded-md p-4 overflow-auto relative">
+                  <pre className="text-sm font-mono">{`import Audio from "@/components/ui/audioplayer`}</pre>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="absolute top-2 right-2 w-4 h-4 hover:bg-transparent text-stone-400 hover:text-stone-900"
+                    onClick={() => copyToClipboard('import Audio from "@/components/ui/audioplayer')}
+                  >
+                    <ClipboardIcon className="w-4 h-4" />
+                    <span className="sr-only">Copy</span>
+                  </Button>
                 </div>
               </div>
             </div>
+            {notification && (
+              <div className="fixed bottom-4 right-4 bg-stone-400 text-white p-2 rounded-lg">
+                {notification}
+              </div>
+            )}
           </div>
         </section>
-        
       </main>
     </div>
   )

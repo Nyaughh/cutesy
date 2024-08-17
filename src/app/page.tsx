@@ -15,14 +15,14 @@ export default function Component() {
                 Elevate your web applications with our delightful, easy-to-use React components.
               </p>
               <div className="flex gap-4">
-                <Button
-                  size="sm"
+                  <Link
+                  href="/compo"
                   className="rounded-full px-4 py-2 text-sm font-medium bg-[#e84393] text-white hover:bg-[#d32f2f] transition-colors"
-                >
-                  Get Started
-                </Button>
+                  prefetch={false}
+                > Get Started
+                  </Link>
                 <Link
-                  href="#"
+                  href="https://github.com/nyaughh/cutesy/"
                   className="inline-flex items-center gap-2 text-[#e84393] font-medium hover:text-[#d32f2f] transition-colors"
                   prefetch={false}
                 >

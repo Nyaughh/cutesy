@@ -8,8 +8,35 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { Input } from "@/components/ui/input"
 import Audio from "@/components/ui/audioplayer"
 
+function ClipboardIcon(props: any) {
+  return (
+    <svg
+      {...props}
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <rect width="8" height="4" x="8" y="2" rx="1" ry="1" />
+      <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
+    </svg>
+  )
+}
+
 export default function Component() {
   const [activeCode, setActiveCode] = useState<string | null>(null)
+  const [notification, setNotification] = useState<string | null>(null)
+
+  const copyToClipboard = (text: string) => {
+    navigator.clipboard.writeText(text)
+    setNotification("Code copied to clipboard!")
+    setTimeout(() => setNotification(null), 2000) // Hide notification after 2 seconds
+  }
 
   return (
     <div className="flex flex-col min-h-screen bg-[#ffedf5] text-[#333] font-inter">
@@ -23,12 +50,7 @@ export default function Component() {
                 description="A cute audio player."
                 code={`npx cutesy@latest add audio`}
                 component={<Audio />}
-                onCodeCopy={() => {
-                navigator.clipboard.writeText(``)
-                  alert("Code copied to clipboard!")
-                  
-                  
-                }}
+                onCodeCopy={() => copyToClipboard('npx cutesy@latest add audio')}
                 onToggle={() => setActiveCode(activeCode === 'audio' ? null : 'audio')}
                 isActive={activeCode === 'audio'}
               />
@@ -37,6 +59,11 @@ export default function Component() {
           </div>
         </section>
       </main>
+      {notification && (
+        <div className="fixed bottom-4 right-4 bg-stone-400 text-white p-2 rounded-lg">
+          {notification}
+        </div>
+      )}
     </div>
   )
 }
@@ -68,11 +95,13 @@ function ComponentCard({
           <h3 className="text-xl font-bold">{title}</h3>
         </div>
         <p className="text-[#666] mb-4">{description}</p>
-        <div className="bg-[#ffedf5] rounded-md p-4 overflow-auto flex-1 relative">
+        <div className="bg-[#ffedf5] rounded-md p-4 overflow-auto flex-1 relative min-h-[200px]">
           {isActive ? (
-            <pre className="text-sm font-mono">{code}</pre>
+            <div className="flex items-center justify-center h-full min-h-[200px]">
+              <pre className="flex text-sm font-mono items-center justify-center min-h-[60px] bg-[#ffffffcc] p-4 rounded-md">{code}</pre>
+            </div>
           ) : (
-            <div className="flex items-center justify-center h-full">
+            <div className="flex items-center justify-center h-full min-h-[200px]">
               {component}
             </div>
           )}
@@ -137,26 +166,6 @@ function CheckIcon(props:any) {
       strokeLinejoin="round"
     >
       <path d="M20 6 9 17l-5-5" />
-    </svg>
-  )
-}
-
-function ClipboardIcon(props:any) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <rect width="8" height="4" x="8" y="2" rx="1" ry="1" />
-      <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
     </svg>
   )
 }

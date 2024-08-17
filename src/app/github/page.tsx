@@ -21,10 +21,16 @@ export default function Component() {
                   <h3 className="text-xl font-bold">GitHub</h3>
                 </div>
                 <p className="text-[#666] mb-4">Check out the Cutesy</p>
+                <Link
+                  href="https://github.com/nyaughh/cutesy"
+                  className="text-[#e84393] font-medium hover:text-[#d32f2f] transition-colors"
+                  prefetch={false}
+                >
+                  Visit GitHub
+                </Link>
               </Card>
             </div>
           </div>
-          <Audio></Audio>
         </section> 
         
       </main>
