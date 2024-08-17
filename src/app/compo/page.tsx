@@ -33,9 +33,35 @@ export default function Component() {
   const [notification, setNotification] = useState<string | null>(null)
 
   const copyToClipboard = (text: string) => {
-    navigator.clipboard.writeText(text)
-    setNotification("Code copied to clipboard!")
-    setTimeout(() => setNotification(null), 2000) // Hide notification after 2 seconds
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(() => {
+        setNotification("Code copied to clipboard!")
+        setTimeout(() => setNotification(null), 2000) // Hide notification after 2 seconds
+      }).catch(err => {
+        console.error('Failed to copy: ', err)
+        fallbackCopyToClipboard(text)
+      })
+    } else {
+      fallbackCopyToClipboard(text)
+    }
+  }
+
+  const fallbackCopyToClipboard = (text: string) => {
+    const textArea = document.createElement("textarea")
+    textArea.value = text
+    textArea.style.position = "fixed"  // Avoid scrolling to bottom
+    textArea.style.opacity = "0"  // Make it invisible
+    document.body.appendChild(textArea)
+    textArea.focus()
+    textArea.select()
+    try {
+      document.execCommand('copy')
+      setNotification("Code copied to clipboard!")
+      setTimeout(() => setNotification(null), 2000) // Hide notification after 2 seconds
+    } catch (err) {
+      console.error('Fallback: Oops, unable to copy', err)
+    }
+    document.body.removeChild(textArea)
   }
 
   return (
@@ -98,7 +124,7 @@ function ComponentCard({
         <div className="bg-[#ffedf5] rounded-md p-4 overflow-auto flex-1 relative min-h-[200px]">
           {isActive ? (
             <div className="flex items-center justify-center h-full min-h-[200px]">
-              <pre className="flex text-sm font-mono items-center justify-center min-h-[60px] bg-[#ffffffcc] p-4 rounded-md">{code}</pre>
+              <pre className="flex text-sm font-mono items-center justify-center min-h-[60px] bg-[#ffffffcc] p-4 rounded-md whitespace-pre-wrap">{code}</pre>
             </div>
           ) : (
             <div className="flex items-center justify-center h-full min-h-[200px]">

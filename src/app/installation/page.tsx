@@ -29,9 +29,33 @@ export default function Component() {
   const [notification, setNotification] = useState<string | null>(null)
 
   const copyToClipboard = (text: string) => {
-    navigator.clipboard.writeText(text)
-    setNotification("Code copied to clipboard!")
-    setTimeout(() => setNotification(null), 2000) // Hide notification after 2 seconds
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(() => {
+        setNotification("Code copied to clipboard!")
+        setTimeout(() => setNotification(null), 2000) // Hide notification after 2 seconds
+      }).catch(err => {
+        fallbackCopyTextToClipboard(text)
+      })
+    } else {
+      fallbackCopyTextToClipboard(text)
+    }
+  }
+
+  const fallbackCopyTextToClipboard = (text: string) => {
+    const textArea = document.createElement("textarea")
+    textArea.value = text
+    textArea.style.position = "fixed"  // Avoid scrolling to bottom
+    document.body.appendChild(textArea)
+    textArea.focus()
+    textArea.select()
+    try {
+      document.execCommand('copy')
+      setNotification("Code copied to clipboard!")
+      setTimeout(() => setNotification(null), 2000) // Hide notification after 2 seconds
+    } catch (err) {
+      console.error('Fallback: Oops, unable to copy', err)
+    }
+    document.body.removeChild(textArea)
   }
 
   return (
@@ -44,8 +68,8 @@ export default function Component() {
               <div>
                 <h3 className="text-xl font-bold mb-4">Installation</h3>
                 <p className="text-[#666] mb-4">Install the Cutesy library:</p>
-                <div className="bg-[#fff] rounded-md p-4 overflow-auto relative">
-                  <pre className="text-sm font-mono">{`npx cutesy@latest add audio`}</pre>
+                <div className="bg-[#fff] rounded-md p-4 relative">
+                  <pre className="text-sm font-mono" style={{ whiteSpace: 'pre-wrap' }}>{`npx cutesy@latest add audio`}</pre>
                   <Button
                     variant="ghost"
                     size="icon"
@@ -62,8 +86,8 @@ export default function Component() {
                 <p className="text-[#666] mb-4">
                   Import the components you need and start using them in your application:
                 </p>
-                <div className="bg-[#fff] rounded-md p-4 overflow-auto relative">
-                  <pre className="text-sm font-mono">{`import Audio from "@/components/ui/audioplayer`}</pre>
+                <div className="bg-[#fff] rounded-md p-4 relative">
+                  <pre className="text-sm font-mono" style={{ whiteSpace: 'pre-wrap' }}>{`import Audio from "@/components/ui/audioplayer`}</pre>
                   <Button
                     variant="ghost"
                     size="icon"
@@ -125,7 +149,7 @@ function BirdIcon(props:any) {
     >
       <path d="M16 7h.01" />
       <path d="M3.4 18H12a8 8 0 0 0 8-8V7a4 4 0 0 0-7.28-2.3L2 20" />
-      <path d="m20 7 2 .5-2 .5" />
+      <path d="M20 7 2 .5-2 .5" />
       <path d="M10 18v3" />
       <path d="M14 17.75V21" />
       <path d="M7 18a6 6 0 0 0 3.84-10.61" />
@@ -169,7 +193,7 @@ function BoxIcon(props:any) {
       strokeLinejoin="round"
     >
       <path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z" />
-      <path d="m3.3 7 8.7 5 8.7-5" />
+      <path d="M3.3 7 8.7 5 8.7-5" />
       <path d="M12 22V12" />
     </svg>
   )
