@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { Button } from "@/components/ui/button";
 import Link from "next/link"
-import { Drawer, DrawerTrigger, DrawerContent, DrawerHeader, DrawerTitle } from "@/components/ui/drawer";
+import { Drawer, DrawerTrigger, DrawerContent, DrawerHeader, DrawerTitle,DrawerClose } from "@/components/ui/drawer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -48,18 +48,28 @@ export default function RootLayout({
               </DrawerTrigger>
               <DrawerContent className="fixed inset-0 z-50 flex flex-col bg-white">
                 <div className="flex flex-col items-center justify-center gap-4 p-4 h-full">
+                  <DrawerClose asChild>
+
+                  
                   <Link href="/compo" className="flex items-center gap-2 text-lg font-medium transition-all duration-300 ease-in-out transform hover:scale-105 hover:text-primary" prefetch={false}>
                     Components
                   </Link>
+                  </DrawerClose>
+                  <DrawerClose asChild>
                   <Link href="/installation" className="flex items-center gap-2 text-lg font-medium transition-all duration-300 ease-in-out transform hover:scale-105 hover:text-primary" prefetch={false}>
                     Installation
                   </Link>
+                  </DrawerClose>
+                  <DrawerClose asChild>
                   <Link href="docs" className="flex items-center gap-2 text-lg font-medium transition-all duration-300 ease-in-out transform hover:scale-105 hover:text-primary" prefetch={false}>
                     Documentation
                   </Link>
+                  </DrawerClose>
+                  <DrawerClose asChild>
                   <Link href="github" className="flex items-center gap-2 text-lg font-medium transition-all duration-300 ease-in-out transform hover:scale-105 hover:text-primary" prefetch={false}>
                     GitHub
                   </Link>
+                  </DrawerClose>
                 </div>
               </DrawerContent>
             </Drawer>
