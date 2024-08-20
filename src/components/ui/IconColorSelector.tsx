@@ -4,14 +4,22 @@ import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select"
 
-export default function IconColorSelector() {
-  const [selectedIcon, setSelectedIcon] = useState("Cat")
-  const [selectedColor, setSelectedColor] = useState("#FF69B4")
+export default function IconColorSelector({
+  selectedIcon,
+  selectedColor,
+  onIconChange,
+  onColorChange
+}: {
+  selectedIcon: string
+  selectedColor: string
+  onIconChange: (icon: string) => void
+  onColorChange: (color: string) => void
+}) {
   const handleIconChange = (icon: string) => {
-    setSelectedIcon(icon)
+    onIconChange(icon)
   }
   const handleColorChange = (color: string) => {
-    setSelectedColor(color)
+    onColorChange(color)
   }
 
   const renderIcon = () => {
@@ -44,15 +52,14 @@ export default function IconColorSelector() {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center">
-      <div className="flex flex-wrap gap-4 justify-center">
+    <div className="flex flex-col items-center justify-center w-full py-4">
+      <div className="w-full max-w-[280px] mb-4 px-2">
         <Button
-          className="bg-white hover:bg-opacity-100 text-opacity-90 font-medium rounded-full px-8 py-4 transition-all duration-300 flex items-center justify-center gap-2 border-2 shadow-md hover:scale-105"
+          className="w-full bg-white hover:bg-opacity-100 text-opacity-90 font-medium rounded-full px-4 py-3 transition-all duration-300 flex items-center justify-center gap-2 border-2 shadow-md hover:scale-105"
           style={{
             color: selectedColor,
             borderColor: selectedColor,
             boxShadow: `0 0 10px ${selectedColor}40`,
-            minWidth: '180px',
           }}
           onMouseEnter={(e) => {
             e.currentTarget.style.boxShadow = `0 0 20px ${selectedColor}60`;
@@ -62,13 +69,13 @@ export default function IconColorSelector() {
           }}
         >
           {renderIcon()}
-          <span className="font-semibold">{selectedIcon}</span>
+          <span className="font-semibold text-sm">{selectedIcon}</span>
         </Button>
       </div>
-      <div className="mt-8 flex gap-4">
-        <div className="w-[180px]">
+      <div className="w-full max-w-[280px] flex flex-wrap justify-center gap-2 px-2">
+        <div className="w-full sm:w-[calc(50%-4px)]">
           <Select onValueChange={handleIconChange} value={selectedIcon}>
-            <SelectTrigger>
+            <SelectTrigger className="w-full">
               <SelectValue placeholder="Select Icon" />
             </SelectTrigger>
             <SelectContent>
@@ -83,13 +90,12 @@ export default function IconColorSelector() {
               <SelectItem value="Sun">Sun</SelectItem>
               <SelectItem value="Moon">Moon</SelectItem>
               <SelectItem value="Cloud">Cloud</SelectItem>
-            
             </SelectContent>
           </Select>
         </div>
-        <div className="w-[180px]">
+        <div className="w-full sm:w-[calc(50%-4px)]">
           <Select onValueChange={handleColorChange} value={selectedColor}>
-            <SelectTrigger>
+            <SelectTrigger className="w-full">
               <SelectValue placeholder="Select Color" />
             </SelectTrigger>
             <SelectContent>
@@ -242,15 +248,11 @@ function FlowerIcon(props: any) {
       strokeLinejoin="round"
     >
       <circle cx="12" cy="12" r="3" />
-      <path d="M12 16.5A4.5 4.5 0 1 1 7.5 12 4.5 4.5 0 1 1 12 7.5a4.5 4.5 0 1 1 4.5 4.5 4.5 4.5 0 1 1-4.5 4.5" />
-      <path d="M12 7.5V9" />
-      <path d="M7.5 12H9" />
-      <path d="M16.5 12H15" />
-      <path d="M12 16.5V15" />
-      <path d="m8 8 1.88 1.88" />
-      <path d="M14.12 9.88 16 8" />
-      <path d="m8 16 1.88-1.88" />
-      <path d="M14.12 14.12 16 16" />
+      <path d="M12 7.5a4.5 4.5 0 1 1 4.5 4.5M12 7.5A4.5 4.5 0 1 0 7.5 12M12 7.5V9m-4.5 3a4.5 4.5 0 1 0 4.5 4.5M7.5 12H9m7.5 0a4.5 4.5 0 1 1-4.5 4.5m4.5-4.5H15m-3 4.5V15" />
+      <path d="m8 16 1.5-1.5" />
+      <path d="M14.5 9.5 16 8" />
+      <path d="m8 8 1.5 1.5" />
+      <path d="M14.5 14.5 16 16" />
     </svg>
   )
 }
@@ -268,10 +270,10 @@ function SquirrelIcon(props: any) {
       strokeLinecap="round"
       strokeLinejoin="round"
     >
-      <path d="M15.236 22a3 3 0 0 0-2.2-5" />
-      <path d="M16 20a3 3 0 0 1 3-3h1a2 2 0 0 0 2-2v-2a4 4 0 0 0-4-4V4" />
-      <path d="M18 13h.01" />
       <path d="M18 6a4 4 0 0 0-4 4 7 7 0 0 0-7 7c0-5 4-5 4-10.5a4.5 4.5 0 1 0-9 0 2.5 2.5 0 0 0 5 0C7 10 3 11 3 17c0 2.8 2.2 5 5 5h10" />
+      <path d="M16 20c0-1.7 1.3-3 3-3h1a2 2 0 0 0 2-2v-2a4 4 0 0 0-4-4V4" />
+      <path d="M15.2 22a3 3 0 0 0-2.2-5" />
+      <path d="M18 13h.01" />
     </svg>
   )
 }
