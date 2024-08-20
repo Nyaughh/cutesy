@@ -3,10 +3,11 @@
 import { useState } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { Card } from "@/components/ui/card"
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Input } from "@/components/ui/input"
 import Audio from "@/components/ui/audioplayer"
+import IconColorSelector from "@/components/ui/IconColorSelector"
 
 function ClipboardIcon(props: any) {
   return (
@@ -80,7 +81,15 @@ export default function Component() {
                 onToggle={() => setActiveCode(activeCode === 'audio' ? null : 'audio')}
                 isActive={activeCode === 'audio'}
               />
-              {/* Add more ComponentCard instances here for other components */}
+              <ComponentCard
+                title="Button"
+                description="Choose an icon and color combination"
+                code={`npx cutesy@latest add button`}
+                component={<IconColorSelector />}
+                onCodeCopy={() => copyToClipboard('npx cutesy@latest add icon-color-selector')}
+                onToggle={() => setActiveCode(activeCode === 'icon-color-selector' ? null : 'icon-color-selector')}
+                isActive={activeCode === 'icon-color-selector'}
+              />
             </div>
           </div>
         </section>
