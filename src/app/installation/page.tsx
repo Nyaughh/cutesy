@@ -69,12 +69,12 @@ export default function Component() {
                 <h3 className="text-xl font-bold mb-4">Installation</h3>
                 <p className="text-[#666] mb-4">Install the Cutesy library:</p>
                 <div className="bg-[#fff] rounded-md p-4 relative">
-                  <pre className="text-sm font-mono" style={{ whiteSpace: 'pre-wrap' }}>{`npx cutesy@latest add audio`}</pre>
+                  <pre className="text-sm font-mono" style={{ whiteSpace: 'pre-wrap' }}>{`npm i cutesy-ui`}</pre>
                   <Button
                     variant="ghost"
                     size="icon"
                     className="absolute top-2 right-2 w-4 h-4 hover:bg-transparent text-stone-400 hover:text-stone-900"
-                    onClick={() => copyToClipboard('npx cutesy@latest add audio')}
+                    onClick={() => copyToClipboard('npm i cutesy-ui')}
                   >
                     <ClipboardIcon className="w-4 h-4" />
                     <span className="sr-only">Copy</span>
@@ -82,17 +82,63 @@ export default function Component() {
                 </div>
               </div>
               <div>
+                <h3 className="text-xl font-bold mb-4">Download Components</h3>
+                <p className="text-[#666] mb-4">Use the Cutesy CLI to add components to your project:</p>
+                <div className="bg-[#fff] rounded-md p-4 relative">
+                  <pre className="text-sm font-mono" style={{ whiteSpace: 'pre-wrap' }}>{`npx cutesy-ui add <component-name>`}</pre>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="absolute top-2 right-2 w-4 h-4 hover:bg-transparent text-stone-400 hover:text-stone-900"
+                    onClick={() => copyToClipboard('npx cutesy-ui add <component-name>')}
+                  >
+                    <ClipboardIcon className="w-4 h-4" />
+                    <span className="sr-only">Copy</span>
+                  </Button>
+                </div>
+                <p className="text-[#666] mt-4">Replace <code>&lt;component-name&gt;</code> with the name of the component you want to add.</p>
+              </div>
+              <div>
                 <h3 className="text-xl font-bold mb-4">Usage</h3>
                 <p className="text-[#666] mb-4">
                   Import the components you need and start using them in your application:
                 </p>
                 <div className="bg-[#fff] rounded-md p-4 relative">
-                  <pre className="text-sm font-mono" style={{ whiteSpace: 'pre-wrap' }}>{`import Audio from "@/components/ui/audioplayer`}</pre>
+                  <pre className="text-sm font-mono" style={{ whiteSpace: 'pre-wrap' }}>{`import Audio from "@/components/cutesy/audio"
+
+export default function AudioDemo() {
+  return (
+    <div className="flex flex-col min-h-screen bg-[#ffedf5] text-[#333] font-inter">
+      <main className="flex-1">
+        <section className="py-16 px-6 md:px-12 lg:px-20">
+          <div className="max-w-5xl mx-auto">
+            <Audio />
+          </div>
+        </section>
+      </main>
+    </div>
+  )
+}
+`}</pre>
                   <Button
                     variant="ghost"
                     size="icon"
                     className="absolute top-2 right-2 w-4 h-4 hover:bg-transparent text-stone-400 hover:text-stone-900"
-                    onClick={() => copyToClipboard('import Audio from "@/components/ui/audioplayer')}
+                    onClick={() => copyToClipboard(`import Audio from "@/components/ui/audioplayer"
+
+export default function AudioDemo() {
+  return (
+    <div className="flex flex-col min-h-screen bg-[#ffedf5] text-[#333] font-inter">
+      <main className="flex-1">
+        <section className="py-16 px-6 md:px-12 lg:px-20">
+          <div className="max-w-5xl mx-auto">
+            <Audio />
+          </div>
+        </section>
+      </main>
+    </div>
+  )
+}`)}
                   >
                     <ClipboardIcon className="w-4 h-4" />
                     <span className="sr-only">Copy</span>

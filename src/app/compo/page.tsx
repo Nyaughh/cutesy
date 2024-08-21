@@ -70,7 +70,7 @@ export default function Component() {
   return (
     <div className="flex flex-col min-h-screen bg-[#ffedf5] text-[#333] font-inter">
       <main className="flex-1">
-        <section className="py-16 px-6 md:px-12 lg:px-20">
+        <section className="py-16 px-6 md:px-10 lg:px-20">
           <div className="max-w-5xl mx-auto">
             <h2 className="text-2xl md:text-3xl font-bold mb-8">Explore our Cutesy Components</h2>
             <div className="flex flex-col gap-8">
