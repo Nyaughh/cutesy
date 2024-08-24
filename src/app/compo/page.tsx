@@ -78,7 +78,7 @@ export default function Component() {
                 title="Cutesy Audio v1.0"
                 description="A cute audio player."
                 code={`npx cutesy@latest add audio`}
-                component={<Audio />}
+                component={<Audio width="w-60 md:w-80 lg:w-96"/>}
                 onCodeCopy={() => copyToClipboard('npx cutesy@latest add audio')}
                 onToggle={() => setActiveCode(activeCode === 'audio' ? null : 'audio')}
                 isActive={activeCode === 'audio'}

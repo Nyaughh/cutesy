@@ -4,7 +4,11 @@ import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
 
-export default function Audio() {
+interface AudioProps {
+  width?: string;
+}
+
+export default function Audio({ width = "w-72" }: AudioProps) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
@@ -68,7 +72,7 @@ export default function Audio() {
   };
 
   return (
-    <div className="bg-[#FFF0F5] rounded-2xl p-2 w-60 shadow-md">
+    <div className={`bg-[#FFF0F5] rounded-2xl p-4 ${width} shadow-md`}>
       <audio
         ref={audioRef}
         src="/Hanae.mp3"
